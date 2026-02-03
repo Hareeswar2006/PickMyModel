@@ -126,22 +126,18 @@ def update_meta_log(dataset_id, best_result):
 
 
 def select_smart_winner(results):
-    # 1. Sort by R²
     results_sorted = sorted(results, key=lambda x: x['r2'], reverse=True)
     absolute_winner = results_sorted[0]
 
-    # 2. Find best SIMPLE model by R²
     best_simple = None
     for res in results_sorted:
         if res['model_name'] in SIMPLE_MODELS:
             best_simple = res
             break
 
-    # 3. If no simple model exists OR best model is already simple
     if best_simple is None or absolute_winner['model_name'] in SIMPLE_MODELS:
         return absolute_winner
 
-    # 4. Compute relative R² improvement
     r2_gain = absolute_winner['r2'] - best_simple['r2']
 
     print("Decision Logic:")
@@ -149,12 +145,10 @@ def select_smart_winner(results):
     print(f"   Best Complex: {absolute_winner['model_name']} (R²: {absolute_winner['r2']:.4f}, RMSE: {absolute_winner['rmse']:.4f})")
     print(f"   R² Gain:      {r2_gain:.4f} (Threshold: {R2_SIMPLICITY_THRESHOLD:.2f})")
 
-    # 5. Simplicity rule based on R²
     if r2_gain < R2_SIMPLICITY_THRESHOLD:
         print("   R² gain is small. Choosing SIMPLE model.")
         return best_simple
 
-    # 6. RMSE sanity check
     rmse_improvement = (best_simple['rmse'] - absolute_winner['rmse']) / best_simple['rmse']
 
     if rmse_improvement < RMSE_GUARD_THRESHOLD:
@@ -188,6 +182,52 @@ def run_bench(dataset_id):
     save_artifacts(dataset_id, winner, results)
     
     update_meta_log(dataset_id, winner)
+
+
+def train_single_model(dataset_id, model_label):
+    df, target_col = load_dataset_info(dataset_id)
+
+    MAX_ROWS = 50000
+    if len(df) > MAX_ROWS:
+        df = df.sample(n=MAX_ROWS, random_state=42)
+
+    X = df.drop(columns=[target_col])
+    y = df[target_col]
+
+    models = {
+        "LinearRegression": LinearRegression(),
+        "Ridge": Ridge(alpha=1.0),
+        "Lasso": Lasso(alpha=0.1, tol=0.1),
+        "RandomForest": RandomForestRegressor(n_estimators=50, random_state=42, n_jobs=-1),
+        "GradientBoosting": GradientBoostingRegressor(n_estimators=50, random_state=42, subsample=0.8)
+    }
+
+    if model_label not in models:
+        raise ValueError(f"Unsupported regression model: {model_label}")
+
+    model = models[model_label]
+
+    kf = KFold(n_splits=5, shuffle=True, random_state=42)
+
+    neg_mse_scores = cross_val_score(model, X, y, cv=kf, scoring="neg_mean_squared_error")
+    rmse_scores = np.sqrt(-neg_mse_scores)
+
+    r2_scores = cross_val_score(model, X, y, cv=kf, scoring="r2")
+
+    metrics = {
+        "rmse": round(float(np.mean(rmse_scores)), 4),
+        "r2": round(float(np.mean(r2_scores)), 4)
+    }
+
+    model.fit(X, y)
+
+    os.makedirs(MODEL_DIR, exist_ok=True)
+    model_path = os.path.join(MODEL_DIR, f"{dataset_id}_best_model.pkl")
+
+    with open(model_path, "wb") as f:
+        pickle.dump(model, f)
+
+    return metrics, model_path
 
 
 if __name__ == "__main__":

@@ -1,0 +1,19 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, sans-serif;
+  background-color: #fafafa;
+  color: #111827;
+  line-height: 1.5;
+}
+
+h1, h2, h3 {
+  margin: 0 0 16px 0;
+}
+
+button {
+  cursor: pointer;
+}

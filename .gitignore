@@ -25,3 +25,6 @@ datasets/
 src/dataset_miner.py
 
 Updates.md
+
+backend/app/logs
+backend/app/tmp

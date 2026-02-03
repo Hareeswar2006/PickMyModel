@@ -1,0 +1,190 @@
+/* Landing.css */
+
+/* --- Reset & Base --- */
+:root {
+  --bg-color: #f8fafc;
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.landing-page {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-color);
+  overflow: hidden;
+  font-family: var(--font-family);
+  padding: 1rem; /* Padding prevents edge touching on mobile */
+}
+
+/* --- Glassmorphism Card --- */
+.landing-card {
+  position: relative;
+  z-index: 10;
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
+  padding: 4rem 2rem;
+  
+  /* The Glass Effect */
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 32px;
+  box-shadow: 
+    0 25px 50px -12px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+    
+  /* Animation on load */
+  animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* --- Typography & Elements --- */
+.landing-header {
+  margin-bottom: 1.5rem;
+}
+
+/* Pill Badge */
+.badge {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: rgba(37, 99, 235, 0.1);
+  color: var(--primary);
+  font-size: 0.875rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Responsive Heading using Clamp */
+.hero-title {
+  font-size: clamp(2.5rem, 6vw, 4.5rem); /* Scales between 2.5rem and 4.5rem */
+  line-height: 1.1;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-description {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: var(--text-muted);
+  max-width: 600px;
+  margin: 0 auto 3rem auto;
+  line-height: 1.6;
+}
+
+/* --- Buttons --- */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: var(--text-main);
+  color: white;
+  font-size: 1.125rem;
+  font-weight: 600;
+  padding: 1rem 2.5rem;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:hover {
+  background-color: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary svg {
+  transition: transform 0.2s ease;
+}
+
+.btn-primary:hover svg {
+  transform: translateX(4px);
+}
+
+/* --- Background Blobs --- */
+.gradient-sphere {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: 0;
+  animation: float 10s infinite ease-in-out;
+  opacity: 0.6;
+}
+
+.sphere-1 {
+  width: 60vh;
+  height: 60vh;
+  background: radial-gradient(circle, #bfdbfe 0%, #a5b4fc 100%);
+  top: -10%;
+  left: -10%;
+}
+
+.sphere-2 {
+  width: 50vh;
+  height: 50vh;
+  background: radial-gradient(circle, #fbcfe8 0%, #e879f9 100%);
+  bottom: -10%;
+  right: -10%;
+  animation-delay: -5s;
+}
+
+/* --- Animations --- */
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(20px, -20px); }
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+  .landing-card {
+    padding: 2.5rem 1.5rem; /* Less padding inside card on mobile */
+    border-radius: 24px;
+    /* On very small screens, make glass effect slightly less transparent for readability */
+    background: rgba(255, 255, 255, 0.85); 
+  }
+
+  .sphere-1, .sphere-2 {
+    width: 80vw; /* Make blobs larger relative to screen width on mobile */
+    height: 80vw;
+    opacity: 0.4; /* Fade them out slightly so text is readable */
+  }
+
+  .btn-primary {
+    width: 100%; /* Full width button on mobile for easier tapping */
+    padding: 1rem;
+  }
+  
+  .badge {
+    margin-bottom: 1rem;
+    font-size: 0.75rem;
+  }
+}

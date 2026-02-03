@@ -50,6 +50,23 @@ def prepare_features(df, feature_names):
     return X
 
 
+def predict_best_model_for_dataset(dataset_id):
+    model, label_encoder, feature_names = load_artifacts()
+    df = load_meta_csv()
+
+    row = df[df["dataset_id"] == dataset_id]
+    if row.empty:
+        raise ValueError(f"Dataset {dataset_id} not found in meta_reg.csv")
+
+    X = prepare_features(row, feature_names)
+
+    pred = model.predict(X)[0]
+    best_model_label = label_encoder.inverse_transform([pred])[0]
+
+    return best_model_label
+
+
+
 def main():
     print("[META] Predicting missing best_model_label values")
 

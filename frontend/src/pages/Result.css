@@ -1,0 +1,220 @@
+/* Result.css */
+
+.result-page {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+  background-color: #f8fafc;
+  min-height: calc(100vh - 72px); /* Adjust based on navbar height */
+}
+
+.result-container {
+  width: 100%;
+  max-width: 900px;
+  animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Header --- */
+.result-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.success-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #dcfce7;
+  color: #166534;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.4rem 1rem;
+  border-radius: 100px;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.result-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.03em;
+}
+
+.result-subtitle {
+  color: #64748b;
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* --- Stats Grid --- */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.stat-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+}
+
+/* Highlight Card (Best Model) */
+.stat-card.highlight-card {
+  background: linear-gradient(135deg, #0f172a 0%, #334155 100%);
+  color: white;
+  border: none;
+  grid-column: span 2; /* Span 2 cols on wider screens */
+}
+
+@media (max-width: 600px) {
+  .stat-card.highlight-card {
+    grid-column: span 1;
+  }
+}
+
+.stat-card.highlight-card .stat-label {
+  color: #94a3b8;
+}
+
+.stat-card.highlight-card .stat-value {
+  color: white;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  margin-bottom: 0.5rem;
+}
+
+.stat-value-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.metric-number {
+  font-family: 'Monaco', 'Consolas', monospace;
+  color: #2563eb;
+}
+
+.model-icon {
+  color: #38bdf8;
+}
+
+/* --- Divider --- */
+.divider {
+  border: 0;
+  height: 1px;
+  background: #e2e8f0;
+  margin: 2rem 0;
+}
+
+/* --- Locked Section --- */
+.locked-section {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 3rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
+}
+
+/* Subtle pattern for locked background */
+.locked-section::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.3;
+  z-index: 0;
+}
+
+.lock-icon-wrapper {
+  background: #f1f5f9;
+  padding: 1rem;
+  border-radius: 50%;
+  color: #64748b;
+  margin-bottom: 1.5rem;
+  z-index: 1;
+}
+
+.locked-section h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.75rem;
+  z-index: 1;
+}
+
+.locked-section p {
+  color: #64748b;
+  max-width: 450px;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  z-index: 1;
+}
+
+.btn-lock-action {
+  z-index: 1;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 100px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-lock-action:hover {
+  background: #1d4ed8;
+}
+
+/* --- Detailed Analysis (Unlocked) --- */
+.detailed-analysis {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}

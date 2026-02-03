@@ -1,0 +1,168 @@
+/* AnalyticsSection.css */
+
+.analytics-container {
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.section-header {
+  margin-bottom: 1.5rem;
+}
+
+.section-header h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.25rem;
+}
+
+.section-desc {
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+/* Grid Layout */
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+/* Card Styling */
+.analytics-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.analytics-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+/* Icons */
+.card-icon-bg {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.card-icon-bg.blue { background-color: #eff6ff; color: #2563eb; }
+.card-icon-bg.green { background-color: #f0fdf4; color: #16a34a; }
+.card-icon-bg.red { background-color: #fef2f2; color: #dc2626; }
+.card-icon-bg.purple { background-color: #faf5ff; color: #9333ea; }
+
+/* Content */
+.card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  margin-bottom: 0.5rem;
+}
+
+/* Metric Group (Rows/Cols) */
+.metric-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+}
+
+.metric-val {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.2;
+}
+
+.metric-key {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.metric-divider {
+  width: 1px;
+  height: 24px;
+  background-color: #cbd5e1;
+}
+
+/* Quality Section */
+.quality-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.quality-val {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.text-muted {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: #64748b;
+}
+
+.status-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 99px;
+  width: fit-content;
+}
+
+.status-badge.success { background: #dcfce7; color: #15803d; }
+.status-badge.danger { background: #fee2e2; color: #b91c1c; }
+
+/* Stats List (Skew/Balance) */
+.stats-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+}
+
+.stat-name {
+  color: #64748b;
+}
+
+.stat-number {
+  font-weight: 600;
+  color: #334155;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .analytics-grid {
+    grid-template-columns: 1fr;
+  }
+}

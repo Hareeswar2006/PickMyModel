@@ -1,0 +1,127 @@
+/* DownloadSection.css */
+
+.downloads-container {
+  margin-top: 2.5rem;
+  width: 100%;
+}
+
+/* Grid Layout for Cards */
+.artifacts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+/* --- Artifact Card --- */
+.artifact-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.2s ease;
+}
+
+.artifact-card:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+/* Icon Styles */
+.artifact-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.csv-icon {
+  background-color: #ecfdf5; /* Light Green */
+  color: #059669;
+}
+
+.model-icon {
+  background-color: #eff6ff; /* Light Blue */
+  color: #2563eb;
+}
+
+/* Text Content */
+.artifact-content {
+  flex: 1;
+}
+
+.artifact-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 4px 0;
+}
+
+.artifact-meta {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin: 0;
+}
+
+/* --- Buttons (Anchor Tags) --- */
+.btn-download {
+  padding: 0.6rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 100px;
+  display: inline-flex; /* Changed to inline-flex for <a> tags */
+  align-items: center;
+  justify-content: center;
+  text-decoration: none; /* Removes underline from links */
+  text-align: center;
+}
+
+/* Secondary Style (For Pipeline) */
+.btn-download {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  color: #334155;
+}
+
+.btn-download:hover {
+  background: #f8fafc;
+  color: #0f172a;
+  border-color: #cbd5e1;
+}
+
+/* Primary Style (For Model) */
+.btn-download.primary {
+  background: #0f172a;
+  border: 1px solid #0f172a;
+  color: white;
+}
+
+.btn-download.primary:hover {
+  background: #000;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .artifacts-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .artifact-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5rem;
+  }
+  
+  .btn-download {
+    width: 100%;
+  }
+}

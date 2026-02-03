@@ -177,10 +177,53 @@ class RegressionPreprocessor:
             df[self.target_column] = target_series.loc[df.index]
 
         return df
+    
+
+    def save_feature_schema(self, df_raw):
+        features = []
+
+        for col in df_raw.columns:
+            if col == self.target_column:
+                continue
+
+            if pd.api.types.is_numeric_dtype(df_raw[col]):
+                features.append({
+                    "name": col,
+                    "type": "numeric",
+                    "min": float(df_raw[col].min()),
+                    "max": float(df_raw[col].max()),
+                    "example": float(df_raw[col].dropna().iloc[0])
+                })
+            else:
+                features.append({
+                    "name": col,
+                    "type": "categorical",
+                    "values": sorted(df_raw[col].dropna().unique().tolist()),
+                    "example": str(df_raw[col].dropna().iloc[0])
+                })
+
+        schema = {
+            "dataset_id": self.dataset_id,
+            "problem_type": "regression",
+            "target": self.target_column,
+            "features": features
+        }
+
+        BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+        schema_dir = os.path.join(BASE_DIR,"models","preprocessors","regression")
+
+        os.makedirs(schema_dir, exist_ok=True)
+
+        schema_path = os.path.join(schema_dir,f"{self.dataset_id}_schema.json")
+
+        with open(schema_path, "w") as f:
+            json.dump(schema, f, indent=4)
 
 
     def fit_transform(self, df):
         self.fit(df)
+        self.save_feature_schema(df)
         return self.transform(df)
 
 

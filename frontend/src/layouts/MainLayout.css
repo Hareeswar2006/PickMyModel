@@ -1,0 +1,153 @@
+/* MainLayout.css */
+
+/* --- Layout Variables --- */
+:root {
+  --header-height: 72px;
+  --max-width: 1200px;
+  --header-bg: rgba(255, 255, 255, 0.85);
+  --header-border: rgba(0, 0, 0, 0.06);
+}
+
+/* --- App Shell --- */
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f8fafc; /* Matches Landing background */
+}
+
+/* --- Sticky Header --- */
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-height);
+  z-index: 1000;
+  
+  /* Glassmorphism */
+  background-color: var(--header-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--header-border);
+  transition: all 0.3s ease;
+}
+
+/* Container for Header Content */
+.header-content {
+  max-width: var(--max-width);
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* --- Logo Styling --- */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.logo-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2563eb; /* Primary Blue */
+}
+
+.logo-text {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #0f172a;
+  letter-spacing: -0.03em;
+}
+
+/* --- Navigation & Buttons --- */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* "Ghost" Button (Secondary) */
+.nav-btn-ghost {
+  background: transparent;
+  border: none;
+  color: #64748b;
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.nav-btn-ghost:hover {
+  color: #0f172a;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+/* Primary "Login" Button */
+.nav-btn-primary {
+  background-color: #0f172a;
+  color: white;
+  border: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.6rem 1.25rem;
+  border-radius: 100px; /* Pill shape */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.nav-btn-primary:hover {
+  background-color: #000;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+}
+
+/* --- Main Content Area --- */
+.app-main {
+  flex: 1;
+  width: 100%;
+  /* Removed max-width constraint on main so Landing page can be full width */
+  /* If regular pages need constraint, apply it inside the specific page component */
+  padding-top: var(--header-height); /* Offset for sticky header */
+  position: relative;
+  z-index: 1;
+}
+
+/* --- Footer --- */
+.app-footer {
+  text-align: center;
+  padding: 2rem;
+  color: #94a3b8;
+  font-size: 0.85rem;
+  margin-top: auto;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 600px) {
+  .header-content {
+    padding: 0 1rem;
+  }
+
+  .logo-text {
+    font-size: 1.1rem;
+  }
+  
+  /* Hide specific links on very small screens if needed */
+  .nav-btn-ghost {
+    display: none; 
+  }
+
+  .nav-btn-primary {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+}

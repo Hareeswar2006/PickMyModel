@@ -1,6 +1,6 @@
 import os
 import pandas as pd
-from preprocessor.class_preprocessor import ClassificationPreprocessor
+from src.preprocessor.class_preprocessor import ClassificationPreprocessor
 import warnings
 warnings.filterwarnings("ignore", category=RuntimeWarning)
 

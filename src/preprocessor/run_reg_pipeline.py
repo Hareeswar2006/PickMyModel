@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 import warnings
-from preprocessor.reg_preprocessor import RegressionPreprocessor
+from src.preprocessor.reg_preprocessor import RegressionPreprocessor
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))

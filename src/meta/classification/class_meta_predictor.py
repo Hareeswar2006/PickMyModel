@@ -5,13 +5,7 @@ import pandas as pd
 import numpy as np
 
 
-BASE_DIR = os.path.dirname(
-    os.path.dirname(
-        os.path.dirname(
-            os.path.dirname(os.path.abspath(__file__))
-        )
-    )
-)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
 META_CSV = os.path.join(BASE_DIR, "data", "meta", "meta_class.csv")
 ARTIFACT_DIR = os.path.join(BASE_DIR, "models", "meta", "classification")
@@ -61,6 +55,23 @@ def prepare_features(df, feature_names):
     X = X.fillna(0.0).astype(float)
 
     return X
+
+
+def predict_best_model_for_dataset(dataset_id):
+    model, label_encoder, feature_names = load_artifacts()
+    df = load_meta_csv()
+
+    row = df[df["dataset_id"] == dataset_id]
+    if row.empty:
+        raise ValueError(f"Dataset {dataset_id} not found in meta_class.csv")
+
+    X = prepare_features(row, feature_names)
+
+    pred = model.predict(X)[0]
+    best_model_label = label_encoder.inverse_transform([pred])[0]
+
+    return best_model_label
+
 
 
 def main():

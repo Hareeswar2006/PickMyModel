@@ -84,13 +84,7 @@ def train_evaluate_models(X, y):
 
         avg_auc = None
         if is_binary:
-            auc_scores = cross_val_score(
-                model,
-                X,
-                y,
-                cv=skf,
-                scoring="roc_auc"
-            )
+            auc_scores = cross_val_score(model, X, y, cv=skf, scoring="roc_auc")
             avg_auc = auc_scores.mean()
 
         model.fit(X, y)
@@ -197,6 +191,50 @@ def run_bench(dataset_id):
 
     save_artifacts(dataset_id, winner, results)
     update_meta_log(dataset_id, winner)
+
+
+def train_single_model(dataset_id, model_label):
+    df, target_col = load_dataset_info(dataset_id)
+
+    if len(df) > MAX_ROWS:
+        df = df.sample(MAX_ROWS, random_state=42)
+
+    X = df.drop(columns=[target_col])
+    y = df[target_col]
+
+    models = {
+        "LogisticRegression": LogisticRegression(max_iter=500, class_weight="balanced", n_jobs=-1),
+        "RandomForest": RandomForestClassifier(n_estimators=100, random_state=42, n_jobs=-1),
+        "GradientBoosting": GradientBoostingClassifier(n_estimators=100, random_state=42)
+    }
+
+    if model_label not in models:
+        raise ValueError(f"Unsupported model: {model_label}")
+
+    model = models[model_label]
+
+    skf = StratifiedKFold(n_splits=CV_SPLITS, shuffle=True, random_state=42)
+
+    f1_scores = cross_val_score(model, X, y, cv=skf, scoring="f1_weighted")
+    avg_f1 = f1_scores.mean()
+
+    metrics = {"f1": round(avg_f1, 4)}
+
+    if y.nunique() == 2:
+        auc_scores = cross_val_score(model, X, y, cv=skf, scoring="roc_auc")
+        metrics["roc_auc"] = round(auc_scores.mean(), 4)
+
+    model.fit(X, y)
+
+    # Save 
+    os.makedirs(MODEL_DIR, exist_ok=True)
+    model_path = os.path.join(MODEL_DIR, f"{dataset_id}_best_model.pkl")
+
+    with open(model_path, "wb") as f:
+        pickle.dump(model, f)
+
+    return metrics, model_path
+
 
 
 if __name__ == "__main__":
