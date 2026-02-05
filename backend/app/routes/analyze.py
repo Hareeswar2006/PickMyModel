@@ -8,10 +8,10 @@ from typing import Optional
 from src.regression.reg_meta_writer import run_single_regression_meta
 from src.classification.classification_meta_writer import run_single_classification_meta
 
-from services.run_logger import log_run
-from services.preprocessor import run_preprocessor
-from services.meta_predictor import predict_best_model
-from services.bench_trainer import train_and_evaluate
+from app.services.run_logger import log_run
+from app.services.preprocessor import run_preprocessor
+from app.services.meta_predictor import predict_best_model
+from app.services.bench_trainer import train_and_evaluate
 
 router = APIRouter()
 
