@@ -3,6 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 import sys
 import os
 
+port = int(os.environ.get("PORT", 8000))
+
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(PROJECT_ROOT)
 
@@ -12,10 +14,7 @@ app = FastAPI(title="PickMyModel")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        "http://localhost:5173"
-    ],
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
