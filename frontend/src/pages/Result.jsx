@@ -14,11 +14,13 @@ function Result() {
   const {
     dataset_id,
     problem_type,
+    target_column,
     analytics,
     best_model,
     metrics,
     artifacts
   } = state;
+
 
   const isGuest = false;
 
@@ -33,7 +35,7 @@ function Result() {
           </div>
           <h1 className="result-title">Model Performance Report</h1>
           <p className="result-subtitle">
-            We trained multiple candidate models. Here is the best performer for your dataset.
+            Our model predicted the best performer for your dataset.
           </p>
         </div>
 
@@ -84,6 +86,7 @@ function Result() {
             <ModelPlayground
               datasetId={dataset_id}
               problemType={problem_type}
+              targetColumn={target_column}
             />
             <DownloadSection datasetId={dataset_id} problemType={problem_type} />
           </div>

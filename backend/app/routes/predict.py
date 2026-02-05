@@ -51,21 +51,20 @@ def predict(payload: PredictRequest):
         }
 
     if problem == "classification":
-        pred_class = model.predict(X)[0]
-
-        response = {
-            "prediction": pred_class
-        }
+        pred_idx = int(model.predict(X)[0])
 
         if hasattr(model, "predict_proba"):
             probs = model.predict_proba(X)[0]
-            class_labels = model.classes_
+            classes = model.classes_
 
-            response["probabilities"] = {
+            probabilities = {
                 str(cls): float(prob)
-                for cls, prob in zip(class_labels, probs)
+                for cls, prob in zip(classes, probs)
             }
+        else:
+            probabilities = None
 
-        return response
-
-    raise HTTPException(400, "Invalid problem type")
+        return {
+            "prediction": str(model.classes_[pred_idx]),
+            "probabilities": probabilities
+        }

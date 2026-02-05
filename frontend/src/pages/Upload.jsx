@@ -149,7 +149,7 @@ function Upload() {
         isGuest: false
       });
 
-      navigate("/result", { state: result });
+      navigate("/result", { state: { ...result, target_column: targetColumn } });
     } catch (err) {
       setValidationMessages([
         {

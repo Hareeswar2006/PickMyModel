@@ -1,44 +1,78 @@
 /* MainLayout.css */
 
-/* --- Layout Variables --- */
+/* --- Modern Font Import --- */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
 :root {
+  /* --- Dark Theme Palette --- */
+  --bg-deep: #050505;        /* Near Black */
+  --bg-surface: #0a0a0a;     /* Surface Gray */
+  --bg-card: #111111;        /* Card Background */
+  
+  --text-primary: #ededed;   /* High Contrast White */
+  --text-secondary: #a1a1aa; /* Muted Gray */
+  
+  --accent-primary: #D4FF00; /* Neon Lime/Electric Yellow - Very Unique */
+  --accent-secondary: #00e5ff; /* Cyan for subtle glows */
+  
+  --border-subtle: rgba(255, 255, 255, 0.08);
   --header-height: 72px;
   --max-width: 1200px;
-  --header-bg: rgba(255, 255, 255, 0.85);
-  --header-border: rgba(0, 0, 0, 0.06);
 }
 
-/* --- App Shell --- */
+body {
+  font-family: 'Space Grotesk', sans-serif; /* Tech-focused font */
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* --- Layout Shell --- */
 .app-layout {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #f8fafc; /* Matches Landing background */
+  position: relative;
+  overflow-x: hidden;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px; /* Subtle Grid Background */
 }
 
-/* --- Sticky Header --- */
-.app-header {
+/* --- Ambient Background Mesh (Dark Mode Version) --- */
+.ambient-mesh {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: 
+    radial-gradient(circle at 50% 0%, rgba(212, 255, 0, 0.08), transparent 40%),
+    radial-gradient(circle at 0% 50%, rgba(0, 229, 255, 0.05), transparent 30%);
+  pointer-events: none;
+}
+
+/* --- Header --- */
+.app-header {
   height: var(--header-height);
-  z-index: 1000;
-  
-  /* Glassmorphism */
-  background-color: var(--header-bg);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid var(--border-subtle);
+  background: rgba(5, 5, 5, 0.6); /* Translucent Black */
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--header-border);
   transition: all 0.3s ease;
 }
 
-/* Container for Header Content */
 .header-content {
   max-width: var(--max-width);
   height: 100%;
   margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -48,106 +82,89 @@
 .logo-container {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   cursor: pointer;
-  user-select: none;
 }
 
 .logo-icon {
+  color: var(--accent-primary);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #2563eb; /* Primary Blue */
+  filter: drop-shadow(0 0 8px rgba(212, 255, 0, 0.4)); /* Neon Glow */
 }
 
 .logo-text {
-  font-family: 'Inter', sans-serif;
   font-weight: 700;
   font-size: 1.25rem;
-  color: #0f172a;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
 }
 
-/* --- Navigation & Buttons --- */
+/* --- Navigation Button (The "Glitch" Button) --- */
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 1rem;
 }
 
-/* "Ghost" Button (Secondary) */
-.nav-btn-ghost {
-  background: transparent;
-  border: none;
-  color: #64748b;
-  font-weight: 500;
-  font-size: 0.95rem;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  transition: color 0.2s ease, background 0.2s ease;
-}
-
-.nav-btn-ghost:hover {
-  color: #0f172a;
-  background-color: rgba(0, 0, 0, 0.04);
-}
-
-/* Primary "Login" Button */
 .nav-btn-primary {
-  background-color: #0f172a;
-  color: white;
-  border: none;
+  background: transparent;
+  color: var(--accent-primary);
+  border: 1px solid var(--border-subtle);
+  font-family: inherit;
   font-weight: 600;
   font-size: 0.9rem;
   padding: 0.6rem 1.25rem;
-  border-radius: 100px; /* Pill shape */
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-radius: 6px; /* Slightly squared for tech feel */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 0 rgba(212, 255, 0, 0);
 }
 
 .nav-btn-primary:hover {
-  background-color: #000;
+  background: var(--accent-primary);
+  color: #000; /* Black text on neon background */
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 15px rgba(212, 255, 0, 0.3); /* Glow effect */
   transform: translateY(-1px);
-  box-shadow: 0 4px 6px rgba(0,0,0,0.15);
 }
 
-/* --- Main Content Area --- */
+/* --- Main Content --- */
 .app-main {
   flex: 1;
   width: 100%;
-  /* Removed max-width constraint on main so Landing page can be full width */
-  /* If regular pages need constraint, apply it inside the specific page component */
-  padding-top: var(--header-height); /* Offset for sticky header */
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2rem;
   position: relative;
   z-index: 1;
 }
 
 /* --- Footer --- */
 .app-footer {
-  text-align: center;
-  padding: 2rem;
-  color: #94a3b8;
-  font-size: 0.85rem;
+  border-top: 1px solid var(--border-subtle);
+  background: var(--bg-deep);
+  padding: 2rem 0;
   margin-top: auto;
 }
 
-/* --- Mobile Responsiveness --- */
-@media (max-width: 600px) {
+.footer-content {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.app-footer p {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
   .header-content {
-    padding: 0 1rem;
-  }
-
-  .logo-text {
-    font-size: 1.1rem;
-  }
-  
-  /* Hide specific links on very small screens if needed */
-  .nav-btn-ghost {
-    display: none; 
-  }
-
-  .nav-btn-primary {
-    padding: 0.5rem 1rem;
-    font-size: 0.85rem;
+    padding: 0 1.25rem;
   }
 }

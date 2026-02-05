@@ -1,67 +1,104 @@
 /* AnalyticsSection.css */
 
 .analytics-container {
-  margin-top: 2rem;
   width: 100%;
+  animation: fadeIn 0.5s ease-out;
 }
 
+/* --- Header --- */
 .section-header {
   margin-bottom: 1.5rem;
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
 }
 
 .section-header h3 {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #0f172a;
-  margin-bottom: 0.25rem;
+  color: var(--text-primary);
+  margin: 0;
+  letter-spacing: -0.02em;
 }
 
 .section-desc {
-  color: #64748b;
+  color: var(--text-secondary);
   font-size: 0.9rem;
+  margin: 0;
 }
 
-/* Grid Layout */
+/* --- Grid Layout --- */
 .analytics-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
 }
 
-/* Card Styling */
+/* --- Card Base --- */
 .analytics-card {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
   border-radius: 12px;
-  padding: 1.25rem;
+  padding: 1.5rem;
   display: flex;
-  gap: 1rem;
   align-items: flex-start;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  gap: 1.25rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .analytics-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.3);
 }
 
-/* Icons */
+/* --- Icons with Neon Glows --- */
 .card-icon-bg {
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  border: 1px solid transparent;
 }
 
-.card-icon-bg.blue { background-color: #eff6ff; color: #2563eb; }
-.card-icon-bg.green { background-color: #f0fdf4; color: #16a34a; }
-.card-icon-bg.red { background-color: #fef2f2; color: #dc2626; }
-.card-icon-bg.purple { background-color: #faf5ff; color: #9333ea; }
+/* Variant: Blue/Cyan */
+.card-icon-bg.blue {
+  background: rgba(0, 229, 255, 0.1);
+  color: #00e5ff;
+  border-color: rgba(0, 229, 255, 0.2);
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.1);
+}
 
-/* Content */
+/* Variant: Purple */
+.card-icon-bg.purple {
+  background: rgba(168, 85, 247, 0.1);
+  color: #a855f7;
+  border-color: rgba(168, 85, 247, 0.2);
+  box-shadow: 0 0 15px rgba(168, 85, 247, 0.1);
+}
+
+/* Variant: Green (Clean) */
+.card-icon-bg.green {
+  background: rgba(212, 255, 0, 0.1);
+  color: var(--accent-primary);
+  border-color: rgba(212, 255, 0, 0.2);
+  box-shadow: 0 0 15px rgba(212, 255, 0, 0.1);
+}
+
+/* Variant: Red (Heavy Loss) */
+.card-icon-bg.red {
+  background: rgba(255, 0, 60, 0.1);
+  color: #ff003c;
+  border-color: rgba(255, 0, 60, 0.3);
+  box-shadow: 0 0 15px rgba(255, 0, 60, 0.1);
+}
+
+/* --- Card Content --- */
 .card-content {
   flex: 1;
   display: flex;
@@ -72,16 +109,16 @@
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
+  color: var(--text-secondary);
   letter-spacing: 0.05em;
-  color: #64748b;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
-/* Metric Group (Rows/Cols) */
+/* --- Metrics Group (Rows/Features) --- */
 .metric-group {
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: space-between;
 }
 
 .metric {
@@ -90,79 +127,96 @@
 }
 
 .metric-val {
-  font-size: 1.1rem;
+  font-family: 'Space Grotesk', monospace;
+  font-size: 1.5rem;
   font-weight: 700;
-  color: #0f172a;
-  line-height: 1.2;
+  color: var(--text-primary);
+  line-height: 1.1;
 }
 
 .metric-key {
-  font-size: 0.75rem;
-  color: #64748b;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
 }
 
 .metric-divider {
   width: 1px;
-  height: 24px;
-  background-color: #cbd5e1;
+  height: 32px;
+  background: var(--border-subtle);
 }
 
-/* Quality Section */
+/* --- Data Quality Row --- */
 .quality-row {
   display: flex;
-  flex-direction: column;
-  gap: 6px;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
 .quality-val {
-  font-size: 1.1rem;
+  font-family: 'Space Grotesk', monospace;
+  font-size: 1.5rem;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--text-primary);
+  display: flex;
+  flex-direction: column;
 }
 
 .text-muted {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 400;
-  color: #64748b;
+  color: var(--text-secondary);
+  font-family: 'Space Grotesk', sans-serif;
+  margin-top: 4px;
 }
 
 .status-badge {
-  display: inline-block;
   font-size: 0.75rem;
-  font-weight: 600;
-  padding: 2px 8px;
-  border-radius: 99px;
-  width: fit-content;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 100px;
+  text-transform: uppercase;
 }
 
-.status-badge.success { background: #dcfce7; color: #15803d; }
-.status-badge.danger { background: #fee2e2; color: #b91c1c; }
+.status-badge.success {
+  background: rgba(212, 255, 0, 0.15);
+  color: var(--accent-primary);
+  border: 1px solid rgba(212, 255, 0, 0.3);
+}
 
-/* Stats List (Skew/Balance) */
+.status-badge.danger {
+  background: rgba(255, 0, 60, 0.15);
+  color: #ff003c;
+  border: 1px solid rgba(255, 0, 60, 0.3);
+}
+
+/* --- Distribution Stats List --- */
 .stats-list {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
 }
 
 .stat-item {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   font-size: 0.9rem;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed var(--border-subtle);
+}
+
+.stat-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
 .stat-name {
-  color: #64748b;
+  color: var(--text-secondary);
 }
 
 .stat-number {
+  font-family: 'Space Grotesk', monospace;
+  color: var(--text-primary);
   font-weight: 600;
-  color: #334155;
-}
-
-/* Mobile */
-@media (max-width: 600px) {
-  .analytics-grid {
-    grid-template-columns: 1fr;
-  }
 }

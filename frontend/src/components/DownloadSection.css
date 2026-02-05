@@ -1,11 +1,31 @@
 /* DownloadSection.css */
 
 .downloads-container {
-  margin-top: 2.5rem;
+  margin-top: 3rem;
   width: 100%;
+  animation: fadeIn 0.8s ease-out;
 }
 
-/* Grid Layout for Cards */
+/* --- Header --- */
+.section-header {
+  margin-bottom: 2rem;
+}
+
+.section-header h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.02em;
+}
+
+.section-desc {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* --- Grid --- */
 .artifacts-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -14,111 +34,148 @@
 
 /* --- Artifact Card --- */
 .artifact-card {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
   border-radius: 12px;
-  padding: 1.25rem;
+  padding: 1.5rem;
   display: flex;
   align-items: center;
-  gap: 1rem;
-  transition: all 0.2s ease;
+  gap: 1.25rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
 }
 
+/* Hover Effect: Cyber Glow */
 .artifact-card:hover {
-  border-color: #cbd5e1;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
 }
 
-/* Icon Styles */
+/* Decorative corner accent (Tech feel) */
+.artifact-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, transparent 50%, rgba(255, 255, 255, 0.03) 50%);
+}
+
+/* --- Icons --- */
 .artifact-icon-wrapper {
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
 }
 
-.csv-icon {
-  background-color: #ecfdf5; /* Light Green */
-  color: #059669;
+/* Model Icon: Neon Purple */
+.artifact-icon-wrapper.model-icon {
+  background: rgba(168, 85, 247, 0.1);
+  color: #a855f7;
+  border-color: rgba(168, 85, 247, 0.2);
 }
 
-.model-icon {
-  background-color: #eff6ff; /* Light Blue */
-  color: #2563eb;
+.artifact-card:hover .model-icon {
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
+  color: #c084fc;
 }
 
-/* Text Content */
+/* CSV Icon: Neon Cyan */
+.artifact-icon-wrapper.csv-icon {
+  background: rgba(0, 229, 255, 0.1);
+  color: #00e5ff;
+  border-color: rgba(0, 229, 255, 0.2);
+}
+
+.artifact-card:hover .csv-icon {
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+  color: #80f4ff;
+}
+
+/* --- Text Content --- */
 .artifact-content {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .artifact-title {
-  font-size: 0.95rem;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 1.1rem;
   font-weight: 700;
-  color: #0f172a;
-  margin: 0 0 4px 0;
+  color: var(--text-primary);
+  margin: 0;
+  letter-spacing: -0.01em;
 }
 
 .artifact-meta {
   font-size: 0.8rem;
-  color: #64748b;
+  color: var(--text-secondary);
   margin: 0;
+  font-family: 'Space Grotesk', monospace; /* Tech feel */
 }
 
-/* --- Buttons (Anchor Tags) --- */
+/* --- Buttons --- */
 .btn-download {
-  padding: 0.6rem 1rem;
+  padding: 0.6rem 1.25rem;
   font-size: 0.85rem;
   font-weight: 600;
-  border-radius: 8px;
+  font-family: inherit;
+  border-radius: 6px;
   cursor: pointer;
+  text-decoration: none;
   transition: all 0.2s;
-  min-width: 100px;
-  display: inline-flex; /* Changed to inline-flex for <a> tags */
+  display: flex;
   align-items: center;
   justify-content: center;
-  text-decoration: none; /* Removes underline from links */
-  text-align: center;
-}
-
-/* Secondary Style (For Pipeline) */
-.btn-download {
-  background: #fff;
-  border: 1px solid #e2e8f0;
-  color: #334155;
+  white-space: nowrap;
+  border: 1px solid var(--border-subtle);
+  background: transparent;
+  color: var(--text-secondary);
 }
 
 .btn-download:hover {
-  background: #f8fafc;
-  color: #0f172a;
-  border-color: #cbd5e1;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  border-color: var(--text-primary);
 }
 
-/* Primary Style (For Model) */
+/* Primary Button (Model) - Neon Lime Accent */
 .btn-download.primary {
-  background: #0f172a;
-  border: 1px solid #0f172a;
-  color: white;
+  border-color: rgba(212, 255, 0, 0.3);
+  color: var(--accent-primary);
+  background: rgba(212, 255, 0, 0.05);
 }
 
 .btn-download.primary:hover {
-  background: #000;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  background: var(--accent-primary);
+  color: #000;
+  box-shadow: 0 0 15px rgba(212, 255, 0, 0.3);
+  border-color: var(--accent-primary);
+  transform: translateY(-1px);
 }
 
 /* Mobile */
 @media (max-width: 600px) {
-  .artifacts-grid {
-    grid-template-columns: 1fr;
-  }
-  
   .artifact-card {
     flex-direction: column;
     text-align: center;
-    padding: 1.5rem;
+    padding: 2rem 1.5rem;
+  }
+  
+  .artifact-content {
+    align-items: center;
+    margin-bottom: 1rem;
   }
   
   .btn-download {
