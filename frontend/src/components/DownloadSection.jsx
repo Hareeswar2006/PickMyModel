@@ -4,7 +4,7 @@ import "./DownloadSection.css";
 function DownloadSection({ datasetId, problemType }) {
   if (!datasetId || !problemType) return null;
 
-  const API_BASE = "http://localhost:8000";
+  const API_BASE = "https://pickmymodel.onrender.com";
 
   return (
     <div className="downloads-container">
