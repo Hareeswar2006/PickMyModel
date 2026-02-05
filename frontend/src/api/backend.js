@@ -1,4 +1,4 @@
-const API_BASE = "https://pickmymodel.onrender.com";
+const API_BASE = "http://localhost:8000";
 
 
 async function handleResponse(res) {
