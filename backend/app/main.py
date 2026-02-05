@@ -8,7 +8,7 @@ port = int(os.environ.get("PORT", 8000))
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(PROJECT_ROOT)
 
-from app.routes import upload, validate, analyze, predict, download, features
+from routes import upload, validate, analyze, predict, download, features
 
 app = FastAPI(title="PickMyModel")
 
