@@ -78,7 +78,7 @@ Used **consistently for both training and inference**.
 ### 🧠 Meta-Learning Engine
 - Logs dataset meta-features + best model outcomes  
 - Trains a **meta-model** to predict the best algorithm  
-- Achieved **~40% accuracy** in best-model prediction (early-stage, limited data)  
+- Achieved **~60% accuracy** in best-model prediction
 
 > Even partial accuracy significantly reduces search space in real AutoML workflows.
 
@@ -95,22 +95,23 @@ Used **consistently for both training and inference**.
 ## 🏗️ System Architecture
 
 User Dataset
-   ↓
+->
 Validation & Problem Detection
-   ↓
+->
 Meta-Feature Extraction
-   ↓
+->
 Preprocessing Pipeline
-   ↓
+-> 
 Model Training & Evaluation
-   ↓
+->
 Best Model Selection
-   ↓
+->
 Meta-Dataset Logging
-   ↓
+->
 Meta-Model Learning
 
 
 ## 👨‍💻 Author
 
 Nallabantu Hareeswar
+
